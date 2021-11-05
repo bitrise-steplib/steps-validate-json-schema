@@ -1,5 +1,5 @@
-github.com/bitrise-io/bitrise-json-schemas v0.0.0-20211105105212-8e52fcdd7da1 h1:Nz4hqWgJT8sB4Zc2DEZ00ie6cjClVwZfPGtPpi6PM8c=
-github.com/bitrise-io/bitrise-json-schemas v0.0.0-20211105105212-8e52fcdd7da1/go.mod h1:V4/MkhuyDfqvejFIhFTRIwk2wqqkz68HL+SqciHT2cA=
+github.com/bitrise-io/bitrise-json-schemas v0.0.0-20211105125017-fe6f92f79051 h1:TDT+uuI71ExcfvQ/1pKRnH8Wo8Lc19vRto0HH+Qafq8=
+github.com/bitrise-io/bitrise-json-schemas v0.0.0-20211105125017-fe6f92f79051/go.mod h1:V4/MkhuyDfqvejFIhFTRIwk2wqqkz68HL+SqciHT2cA=
 github.com/bitrise-io/go-steputils v0.0.0-20210929162140-866a65a1e14a h1:RMwXuRF73TEvZejB2f048FUiEQtzwc0MGFfQHJ2v+sk=
 github.com/bitrise-io/go-steputils v0.0.0-20210929162140-866a65a1e14a/go.mod h1:6Y7Dl40gwgW9YG1RAWcjFBk1u9uotuix8g2IkVTXK34=
 github.com/bitrise-io/go-utils v0.0.0-20210924090918-3e7a04d0da9d/go.mod h1:Vi4MHnaZVL3PVoPPA/Yp6g2pzntkDH8LGiRSY7qw6KQ=
