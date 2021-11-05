@@ -27,7 +27,7 @@ func main() {
 	stepconf.Print(inputs)
 
 	fmt.Println()
-	log.Infof("Validating: ", inputs.YAMLPath)
+	log.Infof("Validating: %s", inputs.YAMLPath)
 
 	var schema string
 	downloader := filedownloader.New(http.DefaultClient)
@@ -48,6 +48,12 @@ func main() {
 		panic("invalid schema path, should start with http or file://")
 	}
 
+	b, err := downloader.ReadLocalFile(inputs.YAMLPath)
+	if err != nil {
+		panic(err)
+	}
+	yaml := string(b)
+
 	validator, err := schemas.NewJSONSchemaValidator(schema)
 	if err != nil {
 		panic(err)
@@ -61,17 +67,17 @@ func main() {
 		}
 	}
 
-	warnings, errors, err := validator.Validate(inputs.YAMLPath, warningPatters...)
+	warnings, errors, err := validator.Validate(yaml, warningPatters...)
 	if err != nil {
 		panic(err)
 	}
 
-	log.Warnf("Warnings: ", len(warnings))
+	log.Warnf("Warnings: %d", len(warnings))
 	for _, warning := range warnings {
 		fmt.Println("- ", warning)
 	}
 
-	log.Errorf("Errors: ", len(errors))
+	log.Errorf("Errors: %d", len(errors))
 	for _, error := range errors {
 		fmt.Println("- ", error)
 	}

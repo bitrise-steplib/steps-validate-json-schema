@@ -30,3 +30,4 @@ inputs:
       Mark the schema validation issues, matching any of the provided regexp patterns, as warning.
 
       Provide a newline (\n) separated list of patterns.
+    is_expand: false
