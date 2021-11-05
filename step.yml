@@ -1,0 +1,32 @@
+title: Validate JSON schema
+summary: Run JSON schema validation.
+
+website: https://github.com/bitrise-steplib/steps-validate-json-schema
+source_code_url: https://github.com/bitrise-steplib/steps-validate-json-schema
+support_url: https://github.com/bitrise-steplib/steps-validate-json-schema/issues
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-validate-json-schema
+
+inputs:
+- schema_url:
+  opts:
+    title: JSON schema URL
+    summary: URL of the JSON schema to use.
+    is_required: true
+
+- yaml_path:
+  opts:
+    title: YAML file path
+    summary: Path of the .yml file to validate.
+    is_required: true
+
+- warning_patterns:
+  opts:
+    title: Warning patterns
+    summary: Mark the schema validation issues, matching any of the provided regexp patterns, as warning.
+    description: |-
+      Mark the schema validation issues, matching any of the provided regexp patterns, as warning.
+
+      Provide a newline (\n) separated list of patterns.

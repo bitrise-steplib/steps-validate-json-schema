@@ -1,0 +1,16 @@
+format_version: "11"
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+workflows:
+  test:
+    steps:
+    - go-list: {}
+    - go-test: {}
+    - script:
+        title: Run golangci-lint
+        inputs:
+        - content: |-
+            #!/bin/env bash
+            set -xeo pipefail
+            curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.1
+            golangci-lint run

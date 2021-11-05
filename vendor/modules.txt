@@ -1,0 +1,20 @@
+# github.com/bitrise-io/bitrise-json-schemas v0.0.0-20211104162939-a91b6ebdb703
+## explicit; go 1.17
+github.com/bitrise-io/bitrise-json-schemas
+# github.com/bitrise-io/go-steputils v0.0.0-20210929162140-866a65a1e14a
+## explicit; go 1.16
+github.com/bitrise-io/go-steputils/stepconf
+# github.com/bitrise-io/go-utils v0.0.0-20211008161027-fa11986847a0
+## explicit; go 1.16
+github.com/bitrise-io/go-utils/colorstring
+github.com/bitrise-io/go-utils/env
+github.com/bitrise-io/go-utils/filedownloader
+github.com/bitrise-io/go-utils/log
+github.com/bitrise-io/go-utils/parseutil
+github.com/bitrise-io/go-utils/pointers
+# github.com/santhosh-tekuri/jsonschema/v3 v3.1.0
+## explicit; go 1.15
+github.com/santhosh-tekuri/jsonschema/v3
+# gopkg.in/yaml.v2 v2.4.0
+## explicit; go 1.15
+gopkg.in/yaml.v2
