@@ -1,4 +1,4 @@
-package schemas
+package validator
 
 import (
 	"errors"
@@ -9,28 +9,6 @@ import (
 	"github.com/santhosh-tekuri/jsonschema/v3"
 	"gopkg.in/yaml.v2"
 )
-
-const (
-	AdditionalPropertiesNotAllowedPattern = `I\[#\] S\[#/additionalProperties\] additionalProperties .+ not allowed` // is_requires_admin_user, host_os_tags, dependencies are deprecated
-	MissingPropertiesPattern              = `I\[#\] S\[#/required\] missing properties: .+`                          // support_url, source_code_url are required
-	SummaryDoesNotMatchPattern            = `I\[#/summary\] S\[#/properties/summary/pattern\] does not match pattern "\^\.\{1,100\}\$"`
-	DepsNotFailedPattern                  = `I\[#/deps/(brew|apt_get)+/\d+/(name|bin_name)+\] S\[#/definitions/(BrewDepModel|AptGetDepModel)+/properties/(name|bin_name)+/not\] not failed` // go listed as dependency
-	InputOutputMissingSummaryPattern      = `I\[#/(inputs|outputs)+/\d+/opts\] S\[#/definitions/EnvVarOpts/required\] missing properties: "summary"`
-	InputOutputEmptySummaryPattern        = `I\[#/(inputs|outputs)+/\d+/opts/summary\] S\[#/definitions/EnvVarOpts/properties/summary/minLength\] length must be >= 1, but got 0`
-	InputValueOptionsDefaultValuePattern  = `I\[#/inputs/\d+/.+\] S\[#/definitions/InputEnvVar/additionalProperties/type\] expected .+, but got .+` // input value is not a string or null
-	InputValueOptionsMinItemsPattern      = `I\[#/inputs/\d+/opts/value_options\] S\[#/definitions/EnvVarOpts/properties/value_options/minItems\] minimum 2 items allowed, but found \d+ items`
-)
-
-var WarningPatters = []string{
-	AdditionalPropertiesNotAllowedPattern,
-	MissingPropertiesPattern,
-	SummaryDoesNotMatchPattern,
-	DepsNotFailedPattern,
-	InputOutputMissingSummaryPattern,
-	InputOutputEmptySummaryPattern,
-	InputValueOptionsDefaultValuePattern,
-	InputValueOptionsMinItemsPattern,
-}
 
 type JSONSchemaValidator struct {
 	schema *jsonschema.Schema
@@ -51,9 +29,9 @@ func NewJSONSchemaValidator(schemaStr string) (*JSONSchemaValidator, error) {
 	}, nil
 }
 
-func (v JSONSchemaValidator) Validate(ymlStr string, warningPatterns ...string) ([]string, []string, error) {
+func (v JSONSchemaValidator) Validate(ymlStr string, warningPatterns ...string) (warns []string, errs []string, err error) {
 	var m interface{}
-	err := yaml.Unmarshal([]byte(ymlStr), &m)
+	err = yaml.Unmarshal([]byte(ymlStr), &m)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -62,11 +40,11 @@ func (v JSONSchemaValidator) Validate(ymlStr string, warningPatterns ...string) 
 		return nil, nil, err
 	}
 
-	if err := v.schema.ValidateInterface(m); err != nil {
+	if err = v.schema.ValidateInterface(m); err != nil {
 		validationErr := &jsonschema.ValidationError{}
 		if errors.As(err, &validationErr) {
-			warnings, errors := collectIssues(*validationErr, warningPatterns)
-			return warnings, errors, nil
+			warns, errs = collectIssues(*validationErr, warningPatterns)
+			return warns, errs, nil
 		}
 		return nil, nil, err
 	}

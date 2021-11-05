@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	schemas "github.com/bitrise-io/bitrise-json-schemas"
+	"github.com/bitrise-io/bitrise-json-schemas/validator"
 	"github.com/bitrise-io/go-steputils/stepconf"
 	"github.com/bitrise-io/go-utils/env"
 	"github.com/bitrise-io/go-utils/filedownloader"
@@ -54,7 +54,7 @@ func main() {
 	}
 	yaml := string(b)
 
-	validator, err := schemas.NewJSONSchemaValidator(schema)
+	validator, err := validator.NewJSONSchemaValidator(schema)
 	if err != nil {
 		panic(err)
 	}

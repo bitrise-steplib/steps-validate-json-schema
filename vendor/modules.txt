@@ -1,6 +1,6 @@
-# github.com/bitrise-io/bitrise-json-schemas v0.0.0-20211104162939-a91b6ebdb703
+# github.com/bitrise-io/bitrise-json-schemas v0.0.0-20211105105212-8e52fcdd7da1
 ## explicit; go 1.17
-github.com/bitrise-io/bitrise-json-schemas
+github.com/bitrise-io/bitrise-json-schemas/validator
 # github.com/bitrise-io/go-steputils v0.0.0-20210929162140-866a65a1e14a
 ## explicit; go 1.16
 github.com/bitrise-io/go-steputils/stepconf
