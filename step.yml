@@ -14,6 +14,10 @@ inputs:
   opts:
     title: JSON schema URL
     summary: URL of the JSON schema to use.
+    description: |-
+      URL of the JSON schema to use.
+
+      Use `file://` prefix for local, while `http` prefix for remote schemas.
     is_required: true
 
 - yaml_path:
