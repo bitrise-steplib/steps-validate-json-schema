@@ -16,7 +16,7 @@ import (
 type Inputs struct {
 	SchemaURL       string `env:"schema_url,required"`
 	YAMLPath        string `env:"yaml_path,required"`
-	WarningPatterns string `env:"warning_patterns,required"`
+	WarningPatterns string `env:"warning_patterns"`
 }
 
 func main() {
@@ -72,14 +72,18 @@ func main() {
 		panic(err)
 	}
 
-	log.Warnf("Warnings: %d", len(warnings))
-	for _, warning := range warnings {
-		fmt.Println("- ", warning)
+	if len(warnings) > 0 {
+		log.Warnf("Warnings: %d", len(warnings))
+		for _, warning := range warnings {
+			fmt.Println("- ", warning)
+		}
 	}
 
-	log.Errorf("Errors: %d", len(errors))
-	for _, error := range errors {
-		fmt.Println("- ", error)
+	if len(errors) > 0 {
+		log.Errorf("Errors: %d", len(errors))
+		for _, error := range errors {
+			fmt.Println("- ", error)
+		}
 	}
 
 	if len(errors) > 0 {
