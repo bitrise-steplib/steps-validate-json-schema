@@ -1,20 +1,10 @@
-format_version: 11
+format_version: "11"
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 workflows:
-  check:
-    steps:
-    - git::https://github.com/bitrise-steplib/steps-check.git: { }
-
-  e2e:
-    steps:
-    - git::https://github.com/bitrise-steplib/steps-check.git:
-        inputs:
-        - workflow: e2e
-
-  sample:
+  test_xcode-archive:
     envs:
-    - SAMPLE_STEP_URL: https://github.com/bitrise-steplib/steps-git-clone.git
+    - SAMPLE_STEP_URL: https://github.com/bitrise-steplib/steps-xcode-archive.git
     - SAMPLE_STEP_BRANCH: master
     steps:
     - script:
@@ -34,10 +24,4 @@ workflows:
         - schema_url: https://raw.githubusercontent.com/bitrise-io/bitrise-json-schemas/main/step.schema.json
         - yaml_path: ./_tmp/step.yml
         - warning_patterns: |-
-            I\[#\] S\[#/additionalProperties\] additionalProperties .+ not allowed
-            I\[#/summary\] S\[#/properties/summary/pattern\] does not match pattern "\^\.\{1,100\}\$"
             I\[#/(inputs|outputs)+/\d+/opts\] S\[#/definitions/EnvVarOpts/required\] missing properties: "summary"
-
-  generate_readme:
-    steps:
-    - git::https://github.com/bitrise-steplib/steps-readme-generator.git@main: { }
